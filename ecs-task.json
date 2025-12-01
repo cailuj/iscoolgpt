@@ -12,8 +12,6 @@
   "containerDefinitions": [
     {
       "name": "iscoolgpt",
-      
-      "image": "331374384030.dkr.ecr.us-east-1.amazonaws.com/iscoolgpt-backend:latest",
 
       "essential": true,
 
