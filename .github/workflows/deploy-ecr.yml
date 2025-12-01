@@ -55,5 +55,5 @@ jobs:
         with:
           task-definition: ${{ steps.task-def.outputs.task-definition }}
           cluster: iscoolgpt-cluster
-          service: iscoolgpt-service
+          service: iscoolgpt-task-service
           wait-for-service-stability: true
