@@ -40,6 +40,14 @@ jobs:
           task-definition: ecs-task.json
           container-name: iscoolgpt
           image: ${{ steps.login-ecr.outputs.registry }}/iscoolgpt-backend:latest
+      - name: Inject env variables into task definition
+        id: inject-env
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          container-name: iscoolgpt
+          environment-variables: |
+            HUGGINGFACEHUB_API_TOKEN=${{ secrets.HUGGINGFACEHUB_API_TOKEN }}
 
       - name: Deploy to Amazon ECS Service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
