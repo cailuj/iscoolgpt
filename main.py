@@ -6,13 +6,13 @@ from app.routers import chat
 app = FastAPI(
     title=settings.PROJECT_NAME,
     version="1.0.0",
-    description="API FastAPI usando google/gemma-2B-it como LLM.",
+    description="API FastAPI usando google/flan-t5 como LLM.",
 )
 
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "model": settings.GEMMA_MODEL_NAME}
+    return {"status": "ok", "model": settings.MODEL_NAME}
 
 
 app.include_router(chat.router)

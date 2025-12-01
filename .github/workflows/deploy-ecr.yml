@@ -48,6 +48,7 @@ jobs:
           image: ${{ steps.login-ecr.outputs.registry }}/iscoolgpt-backend:latest
           environment-variables: |
             HF_TOKEN=${{ secrets.HF_TOKEN }}
+            MODEL_NAME=google/flan-t5-base
 
       # 6) DEPLOY NO ECS
       - name: Deploy to Amazon ECS

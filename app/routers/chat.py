@@ -17,9 +17,9 @@ async def chat(req: ChatRequest) -> ChatResponse:
 
     try:
         answer = generate_answer(req.question, req.context)
-        return ChatResponse(answer=answer, model=settings.GEMMA_MODEL_NAME)
+        return ChatResponse(answer=answer, model=settings.MODEL_NAME)
     except Exception as e:
         raise HTTPException(
             status_code=500,
-            detail=f"Erro ao gerar resposta com Gemma 2: {str(e)}",
+            detail=f"Erro ao gerar resposta com Flan T5: {str(e)}",
         )

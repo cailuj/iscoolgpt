@@ -4,9 +4,9 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Settings:
-    PROJECT_NAME: str = "IsCoolGPT - Gemma 2B API"
+    PROJECT_NAME: str = "IsCoolGPT - Flan T5 API"
     HF_TOKEN: str | None = os.getenv("HF_TOKEN")
-    GEMMA_MODEL_NAME: str = os.getenv("GEMMA_MODEL_NAME", "google/gemma-2b-it")
+    MODEL_NAME: str = os.getenv("MODEL_NAME", "google/flan-t5-base")
 
     MAX_NEW_TOKENS: int = int(os.getenv("MAX_NEW_TOKENS", "256"))
     TEMPERATURE: float = float(os.getenv("TEMPERATURE", "0.1"))
