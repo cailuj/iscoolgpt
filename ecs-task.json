@@ -6,8 +6,8 @@
   "networkMode": "awsvpc",
   "requiresCompatibilities": ["FARGATE"],
   
-  "cpu": "512",
-  "memory": "1024",
+  "cpu": "1024",
+  "memory": "3072",
 
   "containerDefinitions": [
     {
