@@ -6,16 +6,15 @@ from huggingface_hub import login
 from app.config import settings
 
 
-def _login_to_hf():
-    """Autentica no Hugging Face Hub usando HF_TOKEN."""
-    if settings.HF_TOKEN:
-        try:
-            login(settings.HF_TOKEN)
-            logger.info("Autenticado no Hugging Face Hub com HF_TOKEN.")
-        except Exception as e:
-            logger.error(f"Falha ao autenticar no Hugging Face Hub: {e}")
-    else:
-        logger.warning("HF_TOKEN não definido!")
+# 🔥 1. Login global – roda apenas uma vez no startup
+if settings.HF_TOKEN:
+    try:
+        login(settings.HF_TOKEN)
+        logger.info("Autenticado no Hugging Face Hub com HF_TOKEN.")
+    except Exception as e:
+        logger.error(f"Falha ao autenticar no Hugging Face Hub: {e}")
+else:
+    logger.warning("HF_TOKEN não definido!")
 
 
 def _build_prompt(question: str, context: str | None = None) -> str:
@@ -28,12 +27,10 @@ def _build_prompt(question: str, context: str | None = None) -> str:
     return f"{system}\n\nPergunta:\n{question}\n\nResposta:"
 
 
+# 🔥 2. Pipeline cacheado corretamente – carrega só 1 vez
 @lru_cache(maxsize=1)
 def _get_pipeline():
-    """Carrega o modelo Gemma-2B-IT (leve, roda no CPU)."""
-    _login_to_hf()
-
-    device = -1 
+    device = -1
     torch_dtype = torch.float32
 
     logger.info(f"Carregando modelo {settings.GEMMA_MODEL_NAME} no CPU...")
@@ -49,6 +46,7 @@ def _get_pipeline():
     return pipe
 
 
+# 🔥 3. Rota POST agora é instantânea (não recarrega modelo)
 def generate_answer(question: str, context: str | None = None) -> str:
     pipe = _get_pipeline()
     prompt = _build_prompt(question, context)
