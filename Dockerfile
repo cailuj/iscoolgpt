@@ -2,7 +2,6 @@ FROM python:3.11-slim AS builder
 
 WORKDIR /app
 
-# Evita erros de compilação
 RUN apt-get update && apt-get install -y \
     git \
     libprotobuf-dev \
@@ -17,7 +16,6 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copia libs do usuário
 COPY --from=builder /root/.local /root/.local
 COPY . .
 

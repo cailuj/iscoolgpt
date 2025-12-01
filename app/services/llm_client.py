@@ -49,7 +49,7 @@ def _get_pipeline():
     """Carrega o modelo FLAN-T5 (super leve e rápido para CPU)."""
 
     device = -1  # CPU
-    torch_dtype = torch.float32
+    dtype = torch.float32
 
     logger.info(f"Carregando modelo {settings.MODEL_NAME} no modo CPU...")
 
@@ -57,7 +57,7 @@ def _get_pipeline():
         "text2text-generation",
         model=settings.MODEL_NAME,
         device=device,
-        torch_dtype=torch_dtype,
+        dtype=dtype,
     )
 
     logger.info("Pipeline carregado com sucesso para Flan-T5.")
