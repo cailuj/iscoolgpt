@@ -78,8 +78,7 @@ def generate_answer(question: str, context: str | None = None) -> str:
         max_new_tokens=settings.MAX_NEW_TOKENS,
         temperature=settings.TEMPERATURE,
         top_p=settings.TOP_P,
-        do_sample=True,                 # T5 aceita sampling
-        return_full_text=False,
+        do_sample=True,                 
     )
 
     answer = outputs[0]["generated_text"].strip()
