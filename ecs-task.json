@@ -10,7 +10,7 @@
   "containerDefinitions": [
     {
       "name": "iscoolgpt",
-      "image": "REPLACE_ME",
+      "image": "331374384030.dkr.ecr.us-east-1.amazonaws.com/iscoolgpt-backend:latest",
       "portMappings": [
         {
           "containerPort": 8080,

@@ -39,7 +39,7 @@ jobs:
         with:
           task-definition: ecs-task.json
           container-name: iscoolgpt
-          image: ${{ steps.login-ecr.outputs.registry }}/iscoolgpt:latest
+          image: ${{ steps.login-ecr.outputs.registry }}/iscoolgpt-backend:latest
 
       - name: Deploy to Amazon ECS Service
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
